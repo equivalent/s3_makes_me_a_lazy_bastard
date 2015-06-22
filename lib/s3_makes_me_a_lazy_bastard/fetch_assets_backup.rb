@@ -1,5 +1,4 @@
 module S3MakesMeALazyBastard
-
   class FetchAssetsBackup
     include BucketConcern
 
