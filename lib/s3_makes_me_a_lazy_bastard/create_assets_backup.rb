@@ -26,7 +26,7 @@ module S3MakesMeALazyBastard
 
     def  call
       check_folder_ducktype(folder)
-      prepare_folder(folder)
+      prepare_folder(local_backup_folder_path)
       pull_source_bucket_assets
       compress
       push_assets_backup_to_destination

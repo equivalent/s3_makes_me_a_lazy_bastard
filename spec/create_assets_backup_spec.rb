@@ -21,7 +21,7 @@ RSpec.describe S3MakesMeALazyBastard::CreateAssetsBackup do
 
   describe 'execution of commands' do
     it 'pull assets to folder, compres and push to backup bucket' do
-      should_create_folder('/tmp/my-dir')
+      should_create_folder('/tmp/my-dir/foobarbackup')
 
       expect(executor)
         .to receive(:call)
