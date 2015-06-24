@@ -36,8 +36,7 @@ module S3MakesMeALazyBastard
       attr_reader :timestamp_format, :executor, :time_generator
 
       def pull_source_bucket_assets
-        out, error, status = executor.call(*pull_asset_cmd)
-        raise S3CmdError, error unless status.success?
+        s3_execute(*pull_asset_cmd)
       end
 
       def pull_asset_cmd
@@ -46,8 +45,7 @@ module S3MakesMeALazyBastard
       end
 
       def compress
-        out, error, status = executor.call(*compress_cmd)
-        raise error unless status.success?
+        local_execute(*compress_cmd)
       end
 
       def compress_cmd
@@ -67,8 +65,7 @@ module S3MakesMeALazyBastard
       end
 
       def push_assets_backup_to_destination
-        out, error, status = executor.call(*push_cmd)
-        raise S3CmdError, error unless status.success?
+        s3_execute(*push_cmd)
       end
 
       def push_cmd
