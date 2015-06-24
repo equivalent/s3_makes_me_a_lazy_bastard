@@ -44,6 +44,18 @@ RSpec.describe S3MakesMeALazyBastard::CreateAssetsBackup do
         .with(*s3upload)
         .and_return(['not important', '', double(success?: true)])
 
+
+      # cleanup folders after successful run
+      expect(executor)
+        .to receive(:call)
+        .with("rm", "-rf", "/tmp/my-dir/foobarbackup")
+        .and_return(['not important', '', double(success?: true)])
+
+      expect(executor)
+        .to receive(:call)
+        .with("rm", "-rf", "/tmp/my-dir/foobarbackup_2012-01-02_1325462400.tar.gz")
+        .and_return(['not important', '', double(success?: true)])
+
       trigger
     end
   end

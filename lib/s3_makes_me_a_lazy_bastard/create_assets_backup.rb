@@ -27,9 +27,16 @@ module S3MakesMeALazyBastard
     def  call
       check_folder_ducktype(folder)
       prepare_folder(local_backup_folder_path)
-      pull_source_bucket_assets
-      compress
-      push_assets_backup_to_destination
+      begin
+        pull_source_bucket_assets
+        compress
+        push_assets_backup_to_destination
+      ensure
+        if S3MakesMeALazyBastard.config.rm_local_folder_when_finished
+          delete_local_file(local_backup_folder_path)
+          delete_local_file(backup_path)
+        end
+      end
     end
 
     private

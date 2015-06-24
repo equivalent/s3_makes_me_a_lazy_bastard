@@ -13,10 +13,14 @@ module S3MakesMeALazyBastard
 
   class Configuration
     attr_writer :default_executor, :default_logger, :default_timestamp_format,
-      :time_generator, :rm_old_dump
+      :time_generator, :rm_old_dump_on_lunch, :rm_local_folder_when_finished
 
-    def rm_old_dump
-      @rm_old_dump ||= true
+    def rm_local_folder_when_finished
+      @rm_local_folder_when_finished ||= true
+    end
+
+    def rm_old_dump_on_lunch
+      @rm_old_dump_on_lunch ||= true
     end
 
     def default_logger
