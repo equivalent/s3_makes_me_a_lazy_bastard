@@ -5,7 +5,7 @@ RSpec.describe S3MakesMeALazyBastard::FetchAssetsBackup do
   let(:options) {
     {
       source_bucket_name: 'my-awesome-bucket',
-      destination_local_folder: '/tmp/assets-from-my-awesome-bucket',
+      destination_local_folder: Pathname.new('/tmp/assets-from-my-awesome-bucket'),
       executor: executor,
       logger: logger
     }
@@ -21,6 +21,8 @@ RSpec.describe S3MakesMeALazyBastard::FetchAssetsBackup do
     let(:executor) { double :executor }
 
     it 'it should dowload leatest asset backp and extract it' do
+      should_create_folder("/tmp/assets-from-my-awesome-bucket")
+
       expect(executor)
         .to receive(:call)
         .with("s3cmd", "ls", "s3://my-awesome-bucket")
@@ -43,6 +45,8 @@ RSpec.describe S3MakesMeALazyBastard::FetchAssetsBackup do
 
     context 'when s3 ls throws error' do
       it do
+        should_create_folder("/tmp/assets-from-my-awesome-bucket")
+
         expect(executor)
           .to receive(:call)
           .with("s3cmd", "ls", "s3://my-awesome-bucket")

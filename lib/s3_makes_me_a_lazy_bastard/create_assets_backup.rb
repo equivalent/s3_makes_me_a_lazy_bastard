@@ -1,6 +1,8 @@
 module S3MakesMeALazyBastard
   class CreateAssetsBackup
     include BucketConcern
+    include FolderConcern
+    include ExecutorConcern
 
     attr_reader :bucket_name, :folder, :source_bucket_name, :destination_bucket_name, :backup_name
 
@@ -23,7 +25,8 @@ module S3MakesMeALazyBastard
     end
 
     def  call
-      check_folder_ducktype
+      check_folder_ducktype(folder)
+      prepare_folder(folder)
       pull_source_bucket_assets
       compress
       push_assets_backup_to_destination
@@ -31,10 +34,6 @@ module S3MakesMeALazyBastard
 
     private
       attr_reader :timestamp_format, :executor, :time_generator
-
-      def check_folder_ducktype
-        raise 'folder must be a Pathname like object (ducktype)' unless folder.respond_to?(:join)
-      end
 
       def pull_source_bucket_assets
         out, error, status = executor.call(*pull_asset_cmd)

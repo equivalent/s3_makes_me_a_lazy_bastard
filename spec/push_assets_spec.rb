@@ -5,7 +5,7 @@ RSpec.describe S3MakesMeALazyBastard::PushAssets do
   let(:options) {
     {
       destination_bucket_name: 'my-awesome-bucket-staging',
-      source_local_folder: '/tmp/assets-from-my-awesome-bucket/uploads',
+      source_local_folder: Pathname.new('/tmp/assets-from-my-awesome-bucket/uploads'),
       logger: logger,
       executor: executor
     }

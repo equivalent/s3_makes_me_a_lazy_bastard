@@ -1,6 +1,8 @@
 module S3MakesMeALazyBastard
   class PushAssets
     include BucketConcern
+    include FolderConcern
+    include ExecutorConcern
 
     attr_reader :bucket_name, :source_folder
 
@@ -16,14 +18,15 @@ module S3MakesMeALazyBastard
     end
 
     def call
-      executor.call(*sync_cmd)
+      check_folder_ducktype(source_folder)
+      s3_execute(*sync_cmd)
     end
 
     private
       attr_reader :executor, :logger
 
       def sync_cmd
-        ['s3cmd', 'sync', source_folder, bucket]
+        ['s3cmd', 'sync', source_folder.to_s, bucket]
       end
   end
 end
