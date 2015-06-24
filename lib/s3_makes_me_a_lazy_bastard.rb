@@ -1,4 +1,5 @@
 require 'pathname'
+require 'open3'
 require "s3_makes_me_a_lazy_bastard/version"
 require "s3_makes_me_a_lazy_bastard/bucket_concern"
 require "s3_makes_me_a_lazy_bastard/folder_concern"
@@ -24,7 +25,7 @@ module S3MakesMeALazyBastard
 
     # object that responds to #call
     def default_executor
-      @default_executor = ->(cmd) { Open3.capture3 cmd }
+      @default_executor = ->(*cmd) { Open3.capture3 *cmd }
     end
 
     def default_timestamp_format

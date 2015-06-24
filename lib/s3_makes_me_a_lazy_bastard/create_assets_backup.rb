@@ -33,7 +33,7 @@ module S3MakesMeALazyBastard
     end
 
     private
-      attr_reader :timestamp_format, :executor, :time_generator
+      attr_reader :timestamp_format, :executor, :time_generator, :logger
 
       def pull_source_bucket_assets
         s3_execute(*pull_asset_cmd)

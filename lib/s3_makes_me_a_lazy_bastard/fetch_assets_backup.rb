@@ -25,14 +25,11 @@ module S3MakesMeALazyBastard
 
     def fetch_assets_backup
       logger.info "Fetching Latest production assets backup: #{latest_id}"
-      logger.debug fetch_cmd
-
       s3_execute(*fetch_cmd)
     end
 
     def extract_assets_backup
-      logger.debug extract_cmd
-
+      logger.info "Extracting #{destination_file_full_path} to #{destination_folder}"
       local_execute(*extract_cmd)
     end
 

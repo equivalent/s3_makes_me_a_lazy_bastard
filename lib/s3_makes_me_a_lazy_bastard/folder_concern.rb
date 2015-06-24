@@ -3,11 +3,13 @@ module S3MakesMeALazyBastard
     def prepare_folder(destination_folder)
       mkdir_cmd = ['mkdir', '-p', destination_folder.to_s]
       if S3MakesMeALazyBastard.config.rm_old_dump
+        logger.info "Cleaning folder #{destination_folder}"
         local_execute(*mkdir_cmd)
-        local_execute('rm', '-rf', destination_folder.to_s) # rm old dump
+        local_execute(*['rm', '-rf', destination_folder.to_s]) # rm old dump
         # bacause I'm lazy that's why !!
 
       end
+      logger.info "Init folder #{destination_folder}"
       local_execute(*mkdir_cmd)
     end
 
