@@ -29,8 +29,9 @@ RSpec.describe S3MakesMeALazyBastard::CreateAssetsBackup do
               "s3://my-awesome-bucket", "/tmp/my-dir/foobarbackup")
         .and_return(['not important', '', double(success?: true)])
 
-      tar = ["tar", "-zcvf", "/tmp/my-dir/foobarbackup",
-             "/tmp/my-dir/foobarbackup_2012-01-02_1325462400.tar.gz"]
+      tar = ["tar", "-zcvf",
+             "/tmp/my-dir/foobarbackup_2012-01-02_1325462400.tar.gz",
+             "/tmp/my-dir/foobarbackup"]
       expect(executor)
         .to receive(:call)
         .with(*tar)

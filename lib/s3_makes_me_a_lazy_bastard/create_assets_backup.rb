@@ -56,7 +56,7 @@ module S3MakesMeALazyBastard
       end
 
       def compress_cmd
-        ['tar', '-zcvf',  local_backup_folder_path.to_s, backup_path.to_s]
+        ['tar', '-zcvf', backup_path.to_s, local_backup_folder_path.to_s]
       end
 
       def local_backup_folder_path
