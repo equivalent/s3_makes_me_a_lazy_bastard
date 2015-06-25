@@ -1,4 +1,5 @@
 require 'pathname'
+require 'logger'
 require 'open3'
 require "s3_makes_me_a_lazy_bastard/version"
 require "s3_makes_me_a_lazy_bastard/bucket_concern"
