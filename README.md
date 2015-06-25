@@ -32,13 +32,13 @@ carefull.
 Because I had like a day to write this and had s3cmd in place. I'll
 refactor it when I have time
 
-* why `s3cmd` you not using [AWS CLI](http://aws.amazon.com/cli/) ?
+*why `s3cmd` you not using [AWS CLI](http://aws.amazon.com/cli/) ?*
 
 true that `s3cmd` is depricated and `aws s3` should be used but because
 I had s3cmd already on backup machine and I'll refactore it to AWS ruby
 gem I didn't bother
 
-* why the `rm -rf` for deleting old backups
+*why the `rm -rf` for deleting old backups*
 
 was lazy, I'll refactore it
 
