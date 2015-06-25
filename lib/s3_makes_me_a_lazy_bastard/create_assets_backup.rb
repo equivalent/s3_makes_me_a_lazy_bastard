@@ -80,7 +80,7 @@ module S3MakesMeALazyBastard
       end
 
       def time_name
-        time_generator.call.strftime(timestamp_format)
+        @time_name ||= time_generator.call.strftime(timestamp_format)
       end
   end
 end

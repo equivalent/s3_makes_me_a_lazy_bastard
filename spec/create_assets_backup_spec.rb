@@ -15,7 +15,8 @@ RSpec.describe S3MakesMeALazyBastard::CreateAssetsBackup do
 
   let(:logger) { spy }
   let(:executor) { double }
-  let(:time_generator) { ->(){ Time.new(2012, 01, 02) } }
+  let(:times_array) {  [Time.new(666), (this_time_should_be_cached = Time.new(2012, 01, 02))] }
+  let(:time_generator) { ->(){ times_array.pop } }
   let(:backup_creator) { described_class.new(options) }
   let(:trigger) { backup_creator.call }
 
