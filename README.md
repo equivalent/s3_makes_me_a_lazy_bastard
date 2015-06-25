@@ -72,7 +72,7 @@ namespace :s3 do
     desc 'create production assset backup and push it to backup bucket'
     task :create_assets_backup do
       options = {
-        destination_bucket_name: 'myapp-test',
+        destination_bucket_name: 'myapp-production-s3backup',
         source_bucket_name: 'myapp-production',
         transient_local_folder: Pathname.new("/tmp/s3_mmalb/myapp_backup"),
         backup_name: 'myapp-production-assets-backup',
